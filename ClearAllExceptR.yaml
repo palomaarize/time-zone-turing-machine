@@ -1,0 +1,22 @@
+name: binary increment
+source code: |
+  # Adds 1 to a binary number.
+  input: '<11R1111'
+  blank: ' '
+  start state: S1
+  table:
+    # Recebe a fita com os resíduos e a resposta após o R
+    # Encontra o R, vai para a equerda e vai pro próximo estado
+    S0:
+      <: {write: <, R}
+      1: {write: 1 , R}
+      R  : {write: R, L: S1}
+    # Vai apagando todo conteudo da fita até encontrar o delimitador
+    S1:
+    1 : {write: ' ', L}
+    < : {write: < , R: done}
+    done:
+positions:
+  S0: {x: 98.08, y: 243.89}
+  S1: {x: 319.59, y: 243.76}
+  done: {x: 555.25, y: 243.01}
